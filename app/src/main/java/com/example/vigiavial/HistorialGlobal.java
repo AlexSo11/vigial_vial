@@ -10,32 +10,64 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HistorialGlobal extends AppCompatActivity {
+public class HistorialGlobal extends AppCompatActivity
+        implements EstadoSimulador.OnEstadoCambiadoListener {
+
+    RecyclerView rv;
+    TextView tvVacio;
+    ReporteAdapter adapter;
+    List<ReporteModel> lista;
+    DBHelper DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historial_global);
 
-        DBHelper DB = new DBHelper(this);
-        RecyclerView rv = findViewById(R.id.rvReportes);
-        TextView tvVacio = findViewById(R.id.tvVacio);
-
+        DB      = new DBHelper(this);
+        rv      = findViewById(R.id.rvReportes);
+        tvVacio = findViewById(R.id.tvVacio);
         rv.setLayoutManager(new LinearLayoutManager(this));
 
-        List<ReporteModel> lista = new ArrayList<>();
+        lista   = new ArrayList<>();
+        adapter = new ReporteAdapter(this, lista, false);
+        rv.setAdapter(adapter);
+
+        cargarReportes();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        EstadoSimulador.getInstance().setListener(this);
+        cargarReportes();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        EstadoSimulador.getInstance().removeListener();
+    }
+
+    @Override
+    public void onCambio() {
+        cargarReportes();
+    }
+
+    private void cargarReportes() {
+        lista.clear();
 
         Cursor cursor = DB.obtenerTodosReportes();
         while (cursor.moveToNext()) {
             lista.add(new ReporteModel(
-                cursor.getInt(0),
-                cursor.getString(1),
-                cursor.getString(2),
-                cursor.getString(3),
-                cursor.getString(4),
-                cursor.getString(5),
-                cursor.getString(6),
-                cursor.getString(7)
+                    cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3),
+                    cursor.getString(4),
+                    cursor.getString(5),
+                    cursor.getString(6),
+                    cursor.getString(7)
             ));
         }
         cursor.close();
@@ -44,7 +76,9 @@ public class HistorialGlobal extends AppCompatActivity {
             tvVacio.setVisibility(View.VISIBLE);
             rv.setVisibility(View.GONE);
         } else {
-            rv.setAdapter(new ReporteAdapter(this, lista, false));
+            tvVacio.setVisibility(View.GONE);
+            rv.setVisibility(View.VISIBLE);
+            adapter.notifyDataSetChanged();
         }
     }
 }

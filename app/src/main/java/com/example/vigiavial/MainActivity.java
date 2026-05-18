@@ -17,34 +17,45 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tvBienvenida        = findViewById(R.id.tvBienvenida);
-        btnReporte          = findViewById(R.id.btnReporte);
+        tvBienvenida         = findViewById(R.id.tvBienvenida);
+        btnReporte           = findViewById(R.id.btnReporte);
         btnHistorialPersonal = findViewById(R.id.btnHistorialPersonal);
-        btnHistorialGlobal  = findViewById(R.id.btnHistorialGlobal);
+        btnHistorialGlobal   = findViewById(R.id.btnHistorialGlobal);
 
-        // ✅ Recibe el correo desde Login
         correo = getIntent().getStringExtra("correo");
 
         if (correo != null && !correo.isEmpty()) {
-            // Mostrar solo la parte antes del @
             String nombre = correo.split("@")[0];
             tvBienvenida.setText("¡Hola, " + nombre + "!");
         }
 
         btnReporte.setOnClickListener(v -> {
             Intent i = new Intent(this, Reporte.class);
-            i.putExtra("correo", correo); // ✅ pasa correo al reporte
+            i.putExtra("correo", correo);
             startActivity(i);
         });
 
         btnHistorialPersonal.setOnClickListener(v -> {
             Intent i = new Intent(this, HistorialPersonal.class);
-            i.putExtra("correo", correo); // ✅ pasa correo al historial
+            i.putExtra("correo", correo);
             startActivity(i);
         });
 
-        btnHistorialGlobal.setOnClickListener(v -> {
-            startActivity(new Intent(this, HistorialGlobal.class));
-        });
+        btnHistorialGlobal.setOnClickListener(v ->
+                startActivity(new Intent(this, HistorialGlobal.class)));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Inicia el simulador cuando la app está en primer plano
+        EstadoSimulador.getInstance().iniciar(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Detiene el simulador cuando la app va a segundo plano
+        EstadoSimulador.getInstance().detener();
     }
 }
