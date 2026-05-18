@@ -48,16 +48,130 @@
                 android:text="Tipo de Transporte"
                 android:textSize="12sp"
                 android:textColor="#8899AA"
-                android:layout_marginBottom="6dp"/>
+                android:layout_marginBottom="12dp"/>
 
-            <Spinner
-                android:id="@+id/spinnerTransporte"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:background="@drawable/input_bg_dark"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:layout_marginBottom="20dp"/>
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="20dp">
+
+                <!-- Camión -->
+                <LinearLayout
+                    android:id="@+id/btnTransCamion"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/transport_btn_unselected"
+                    android:layout_marginEnd="8dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🚌"
+                        android:textSize="28sp"/>
+
+                    <TextView
+                        android:id="@+id/lblCamion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Camión"
+                        android:textSize="11sp"
+                        android:textColor="#8899AA"
+                        android:layout_marginTop="4dp"/>
+                </LinearLayout>
+
+                <!-- Tren -->
+                <LinearLayout
+                    android:id="@+id/btnTransTren"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/transport_btn_unselected"
+                    android:layout_marginEnd="8dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🚆"
+                        android:textSize="28sp"/>
+
+                    <TextView
+                        android:id="@+id/lblTren"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tren"
+                        android:textSize="11sp"
+                        android:textColor="#8899AA"
+                        android:layout_marginTop="4dp"/>
+                </LinearLayout>
+
+                <!-- Bici -->
+                <LinearLayout
+                    android:id="@+id/btnTransBici"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/transport_btn_unselected"
+                    android:layout_marginEnd="8dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🚲"
+                        android:textSize="28sp"/>
+
+                    <TextView
+                        android:id="@+id/lblBici"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Bici"
+                        android:textSize="11sp"
+                        android:textColor="#8899AA"
+                        android:layout_marginTop="4dp"/>
+                </LinearLayout>
+
+                <!-- Taxi -->
+                <LinearLayout
+                    android:id="@+id/btnTransTaxi"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/transport_btn_unselected"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🚕"
+                        android:textSize="28sp"/>
+
+                    <TextView
+                        android:id="@+id/lblTaxi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Taxi"
+                        android:textSize="11sp"
+                        android:textColor="#8899AA"
+                        android:layout_marginTop="4dp"/>
+                </LinearLayout>
+
+            </LinearLayout>
 
             <!-- Número de unidad -->
             <TextView
