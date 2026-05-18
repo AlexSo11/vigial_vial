@@ -28,13 +28,55 @@
             android:text="Todos los reportes de la comunidad ZMG"
             android:textSize="13sp"
             android:textColor="#8899AA"/>
+
+        <!-- Filtros -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:weightSum="3">
+
+            <Button
+                android:id="@+id/btnFiltroHoy"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                android:text="Hoy"
+                android:textSize="12sp"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#4F8EF7" />
+
+            <Button
+                android:id="@+id/btnFiltroSemana"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                android:text="Semana"
+                android:textSize="12sp"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#1E2E45" />
+
+            <Button
+                android:id="@+id/btnFiltroMes"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:text="Mes"
+                android:textSize="12sp"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#1E2E45" />
+
+        </LinearLayout>
     </LinearLayout>
 
     <TextView
         android:id="@+id/tvVacio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="No hay reportes registrados todavía."
+        android:text="No hay reportes en este período."
         android:gravity="center"
         android:textColor="#8899AA"
         android:textSize="15sp"

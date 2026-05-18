@@ -23,13 +23,13 @@ public class Reporte extends AppCompatActivity {
     String correo, fotoPath = "";
 
     ActivityResultLauncher<String> seleccionarImagen = registerForActivityResult(
-        new ActivityResultContracts.GetContent(), uri -> {
-            if (uri != null) {
-                fotoPath = uri.toString();
-                ivPreview.setImageURI(uri);
-                ivPreview.setVisibility(View.VISIBLE);
-            }
-        });
+            new ActivityResultContracts.GetContent(), uri -> {
+                if (uri != null) {
+                    fotoPath = uri.toString();
+                    ivPreview.setImageURI(uri);
+                    ivPreview.setVisibility(View.VISIBLE);
+                }
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,13 +77,21 @@ public class Reporte extends AppCompatActivity {
                 return;
             }
 
-            Boolean ok = DB.insertarReporte(correo, tipoTransporte, unidad, descripcion, fotoPath);
-            if (ok) {
-                Toast.makeText(this, "¡Reporte enviado!", Toast.LENGTH_SHORT).show();
-                finish();
-            } else {
-                Toast.makeText(this, "Error al enviar el reporte", Toast.LENGTH_SHORT).show();
-            }
+            // Diálogo de confirmación
+            new android.app.AlertDialog.Builder(this)
+                    .setTitle("Confirmar reporte")
+                    .setMessage("¿Estás seguro de que deseas enviar este reporte?")
+                    .setPositiveButton("Sí, enviar", (dialog, which) -> {
+                        Boolean ok = DB.insertarReporte(correo, tipoTransporte, unidad, descripcion, fotoPath);
+                        if (ok) {
+                            Toast.makeText(this, "¡Reporte enviado!", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            Toast.makeText(this, "Error al enviar el reporte", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .setNegativeButton("Cancelar", null)
+                    .show();
         });
     }
 
@@ -91,21 +99,19 @@ public class Reporte extends AppCompatActivity {
         // Deseleccionar el anterior
         if (transporteSeleccionado != null) {
             transporteSeleccionado.setBackground(
-                getResources().getDrawable(R.drawable.transport_btn_unselected, getTheme()));
-            // Resetear color del label anterior
+                    getResources().getDrawable(R.drawable.transport_btn_unselected, getTheme()));
             resetearLabel(transporteSeleccionado);
         }
 
         // Seleccionar el nuevo
         btn.setBackground(
-            getResources().getDrawable(R.drawable.transport_btn_selected, getTheme()));
+                getResources().getDrawable(R.drawable.transport_btn_selected, getTheme()));
         lbl.setTextColor(Color.parseColor("#4F8EF7"));
 
         transporteSeleccionado = btn;
         tipoTransporte = tipo;
     }
 
-    // Regresa el label a su color gris original
     private void resetearLabel(LinearLayout btn) {
         TextView[] labels = { lblCamion, lblTren, lblBici, lblTaxi };
         LinearLayout[] btns = { btnTransCamion, btnTransTren, btnTransBici, btnTransTaxi };

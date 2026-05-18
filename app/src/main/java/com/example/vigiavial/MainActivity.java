@@ -2,6 +2,7 @@ package com.example.vigiavial;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -10,6 +11,7 @@ public class MainActivity extends AppCompatActivity {
 
     CardView btnReporte, btnHistorialPersonal, btnHistorialGlobal;
     TextView tvBienvenida;
+    Button btnCerrarSesion;
     String correo;
 
     @Override
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         btnReporte           = findViewById(R.id.btnReporte);
         btnHistorialPersonal = findViewById(R.id.btnHistorialPersonal);
         btnHistorialGlobal   = findViewById(R.id.btnHistorialGlobal);
+        btnCerrarSesion      = findViewById(R.id.btnCerrarSesion);
 
         correo = getIntent().getStringExtra("correo");
 
@@ -43,19 +46,31 @@ public class MainActivity extends AppCompatActivity {
 
         btnHistorialGlobal.setOnClickListener(v ->
                 startActivity(new Intent(this, HistorialGlobal.class)));
+
+        btnCerrarSesion.setOnClickListener(v -> {
+            new android.app.AlertDialog.Builder(this)
+                    .setTitle("Cerrar sesión")
+                    .setMessage("¿Estás seguro de que deseas cerrar sesión?")
+                    .setPositiveButton("Sí", (dialog, which) -> {
+                        getSharedPreferences("sesion", MODE_PRIVATE).edit().clear().apply();
+                        Intent i = new Intent(MainActivity.this, Login.class);
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(i);
+                    })
+                    .setNegativeButton("Cancelar", null)
+                    .show();
+        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        // Inicia el simulador cuando la app está en primer plano
         EstadoSimulador.getInstance().iniciar(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        // Detiene el simulador cuando la app va a segundo plano
         EstadoSimulador.getInstance().detener();
     }
 }

@@ -41,6 +41,18 @@ public class Registro extends AppCompatActivity {
                 return;
             }
 
+            // Validar formato de correo
+            if (!android.util.Patterns.EMAIL_ADDRESS.matcher(cor).matches()) {
+                Toast.makeText(this, "Ingresa un correo válido", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Validar longitud de contraseña
+            if (pass.length() < 6) {
+                Toast.makeText(this, "La contraseña debe tener al menos 6 caracteres", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             // Nombre completo combinado
             String nombreCompleto = nom + " " + ape;
 

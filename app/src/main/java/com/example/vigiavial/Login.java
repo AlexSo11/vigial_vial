@@ -20,6 +20,17 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        // Si ya hay sesión guardada, saltar directo a MainActivity
+        android.content.SharedPreferences prefs = getSharedPreferences("sesion", MODE_PRIVATE);
+        String correoGuardado = prefs.getString("correo", null);
+        if (correoGuardado != null) {
+            Intent intent = new Intent(Login.this, MainActivity.class);
+            intent.putExtra("correo", correoGuardado);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
         correo   = findViewById(R.id.correo);
         password = findViewById(R.id.password);
         btnLogin       = findViewById(R.id.btnLogin);
@@ -41,11 +52,15 @@ public class Login extends AppCompatActivity {
             if (DB.verificarLogin(cor, pass)) {
                 Toast.makeText(this, "¡Bienvenido!", Toast.LENGTH_SHORT).show();
 
-                // ✅ Se pasa el correo a MainActivity para identificar al usuario
+                // Guardar sesión
+                android.content.SharedPreferences.Editor editor = getSharedPreferences("sesion", MODE_PRIVATE).edit();
+                editor.putString("correo", cor);
+                editor.apply();
+
                 Intent intent = new Intent(Login.this, MainActivity.class);
                 intent.putExtra("correo", cor);
                 startActivity(intent);
-                finish(); // evita regresar al login con el botón atrás
+                finish();
             } else {
                 Toast.makeText(this, "Correo o contraseña incorrectos", Toast.LENGTH_SHORT).show();
             }

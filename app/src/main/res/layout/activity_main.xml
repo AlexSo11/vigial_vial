@@ -233,4 +233,14 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+    <!-- Botón Cerrar Sesión -->
+    <Button
+        android:id="@+id/btnCerrarSesion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Cerrar sesión"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#1E2E45" />
+
 </LinearLayout>
