@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/** Pantalla de inicio de sesión; guarda la sesión en SharedPreferences. */
 public class Login extends AppCompatActivity {
 
     EditText correo, password;

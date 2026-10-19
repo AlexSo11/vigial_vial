@@ -7,6 +7,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+/** Menú principal: crear reportes y consultar historiales. */
 public class MainActivity extends AppCompatActivity {
 
     CardView btnReporte, btnHistorialPersonal, btnHistorialGlobal;

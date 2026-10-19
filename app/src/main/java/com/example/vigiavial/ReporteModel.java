@@ -1,5 +1,6 @@
 package com.example.vigiavial;
 
+/** Modelo de un reporte. */
 public class ReporteModel {
     public int id;
     public String correoUsuario, tipoTransporte, numeroUnidad;

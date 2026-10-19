@@ -8,6 +8,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Color;
 
+/** Formulario para crear un reporte. */
 public class Reporte extends AppCompatActivity {
 
     // Selector de transporte

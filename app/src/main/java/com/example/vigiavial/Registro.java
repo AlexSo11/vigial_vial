@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/** Pantalla de registro de usuarios. */
 public class Registro extends AppCompatActivity {
 
     EditText nombre, apellido, correo, password;

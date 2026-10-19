@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
+/** Adaptador de la lista de reportes (personal y global). */
 public class ReporteAdapter extends RecyclerView.Adapter<ReporteAdapter.ViewHolder> {
 
     Context context;
