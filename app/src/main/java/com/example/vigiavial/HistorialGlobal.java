@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+/** Historial de todos los reportes con filtros por fecha. */
 public class HistorialGlobal extends AppCompatActivity
         implements EstadoSimulador.OnEstadoCambiadoListener {
 
@@ -66,6 +67,7 @@ public class HistorialGlobal extends AppCompatActivity
     protected void onResume() {
         super.onResume();
         EstadoSimulador.getInstance().setListener(this);
+        EstadoSimulador.getInstance().iniciar(this);
         cargarReportes();
     }
 
@@ -73,6 +75,7 @@ public class HistorialGlobal extends AppCompatActivity
     protected void onPause() {
         super.onPause();
         EstadoSimulador.getInstance().removeListener();
+        EstadoSimulador.getInstance().detener();
     }
 
     @Override

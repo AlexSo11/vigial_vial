@@ -6,7 +6,7 @@ import android.os.Looper;
 
 /**
  * Singleton que avanza los estados de los reportes en background.
- * Se inicia desde MainActivity y se detiene cuando la app va a segundo plano.
+ * Cada pantalla lo inicia en onResume y lo detiene en onPause.
  *
  * Intervalo configurado en: DBHelper.INTERVALO_AVANCE_MS
  */

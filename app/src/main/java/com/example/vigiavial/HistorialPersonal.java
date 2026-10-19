@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Historial de los reportes del usuario actual. */
 public class HistorialPersonal extends AppCompatActivity
         implements EstadoSimulador.OnEstadoCambiadoListener {
 
@@ -43,6 +44,7 @@ public class HistorialPersonal extends AppCompatActivity
     protected void onResume() {
         super.onResume();
         EstadoSimulador.getInstance().setListener(this);
+        EstadoSimulador.getInstance().iniciar(this);
         cargarReportes();
     }
 
@@ -50,6 +52,7 @@ public class HistorialPersonal extends AppCompatActivity
     protected void onPause() {
         super.onPause();
         EstadoSimulador.getInstance().removeListener();
+        EstadoSimulador.getInstance().detener();
     }
 
     @Override
